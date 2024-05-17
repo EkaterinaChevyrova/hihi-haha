@@ -1,8 +1,9 @@
 package ru.edel.java.hahatushkabot.model;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @EqualsAndHashCode
@@ -13,7 +14,7 @@ import java.util.Date;
 @Entity //Объявляем класс как сущность для работы с ним в БД и его имя
 @Table(name = "visitors")
 
-public class Visitor {
+public class ReportVisitor {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "your_sequence_generator")

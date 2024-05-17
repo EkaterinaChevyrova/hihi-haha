@@ -3,6 +3,7 @@ package ru.edel.java.hahatushkabot.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.edel.java.hahatushkabot.model.JokesModel;
 import ru.edel.java.hahatushkabot.server.JokesService;
@@ -16,6 +17,7 @@ public class JokesController {
     private final JokesService service;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     ResponseEntity<String> addJokes(@RequestBody JokesModel jok){
         if(jok.getJok() == null){
             return ResponseEntity.badRequest().body("Шутка в том, что шутки нет :(");
@@ -36,6 +38,7 @@ public class JokesController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('MODERATOR')")
     ResponseEntity<String> updateJoke(@PathVariable Long id, @RequestBody JokesModel updatedJoke) {
         if (service.updateJoke(id, updatedJoke)) {
             return ResponseEntity.ok("Уважаемые, хахатушка обновилась!");
@@ -45,6 +48,7 @@ public class JokesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('MODERATOR')")
     ResponseEntity<String> deleteJoke(@PathVariable Long id) {
         if (service.deleteJoke(id)) {
             return ResponseEntity.ok("Мы не хотели этого, но хахатушку удалили :(");

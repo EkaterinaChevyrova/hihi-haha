@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.edel.java.hahatushkabot.model.JokesModel;
-import ru.edel.java.hahatushkabot.model.Visitor;
+import ru.edel.java.hahatushkabot.model.ReportVisitor;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -163,7 +163,7 @@ public class TelegramBotService {
     }
 
     private void saveUserAction(Long chatId, String action, String joke) {
-        Visitor visitor = new Visitor();
+        ReportVisitor visitor = new ReportVisitor();
         visitor.setVisitorId(chatId);
         visitor.setDate(new Date());
 

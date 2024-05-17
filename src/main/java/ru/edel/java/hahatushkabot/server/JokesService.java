@@ -5,9 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.edel.java.hahatushkabot.model.JokesModel;
-import ru.edel.java.hahatushkabot.model.Visitor;
+import ru.edel.java.hahatushkabot.model.ReportVisitor;
 import ru.edel.java.hahatushkabot.repository.JokesRepository;
-import ru.edel.java.hahatushkabot.repository.VisitorRepository;
+import ru.edel.java.hahatushkabot.repository.ReportVisitorRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class JokesService implements JokesInter {
 
     private final JokesRepository repository;
-    private final VisitorRepository visitorRepository;
+    private final ReportVisitorRepository visitorRepository;
 
     @Override
     public void addJok(JokesModel jok) {
@@ -71,16 +71,16 @@ public class JokesService implements JokesInter {
 
 
     @Override
-    public void saveUserAction(Visitor visitor, String action, String joke) {
+    public void saveUserAction(ReportVisitor visitor, String action, String joke) {
         visitor.setJoke(joke);
         visitorRepository.save(visitor);
     }
 
     // Метод для подсчета количества раз, которое каждая шутка была отправлена
     public Map<String, Long> countJokesUsage() {
-        List<Visitor> allVisitors = visitorRepository.findAll();
+        List<ReportVisitor> allVisitors = visitorRepository.findAll();
         return allVisitors.stream()
                 .filter(visitor -> visitor.getJoke() != null)
-                .collect(Collectors.groupingBy(Visitor::getJoke, Collectors.counting()));
+                .collect(Collectors.groupingBy(ReportVisitor::getJoke, Collectors.counting()));
     }
 }

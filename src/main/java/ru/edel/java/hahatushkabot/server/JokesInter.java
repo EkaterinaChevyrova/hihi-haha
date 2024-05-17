@@ -3,7 +3,7 @@ package ru.edel.java.hahatushkabot.server;
 
 import org.springframework.data.domain.Page;
 import ru.edel.java.hahatushkabot.model.JokesModel;
-import ru.edel.java.hahatushkabot.model.Visitor;
+import ru.edel.java.hahatushkabot.model.ReportVisitor;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ public interface JokesInter {
 
     boolean updateJoke(Long id, JokesModel updatedJoke);
     boolean deleteJoke(Long id);
-    void saveUserAction(Visitor visitor, String action, String joke);
+    void saveUserAction(ReportVisitor visitor, String action, String joke);
 }
 
 
